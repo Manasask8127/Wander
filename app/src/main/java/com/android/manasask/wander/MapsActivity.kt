@@ -72,6 +72,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    private fun setPOIOnClick(map:GoogleMap){
+        map.setOnPoiClickListener{poi ->
+            map.addMarker(MarkerOptions().position(poi.latLng)
+                .title(poi.name))
+        }
+    }
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -97,5 +104,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 //        map.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
 //        map.moveCamera(CameraUpdateFactory.newLatLng(sydney))
         setMapLongClick(map)
+        setPOIOnClick(map)
     }
 }
