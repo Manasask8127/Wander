@@ -12,6 +12,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.android.manasask.wander.databinding.ActivityMapsBinding
+import java.util.*
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -56,6 +57,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         else -> super.onOptionsItemSelected(item)
     }
 
+    private fun setMapLongClick(map:GoogleMap){
+        map.setOnMapClickListener { latLng ->
+            // A Snippet is Additional text that's displayed below the title
+            val snippet= String.format(
+                Locale.getDefault(),
+                "Lat: %1$.5f, Long: %2$.5f",
+                latLng.latitude,
+                latLng.longitude
+            )
+            map.addMarker(MarkerOptions().position(latLng)
+                .title(getString(R.string.dropped_pin))
+                .snippet(snippet))
+        }
+    }
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -80,5 +96,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 //        val sydney = LatLng(-34.0, 151.0)
 //        map.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
 //        map.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        setMapLongClick(map)
     }
 }
