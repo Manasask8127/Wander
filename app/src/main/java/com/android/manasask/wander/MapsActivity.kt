@@ -114,11 +114,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val lat=13.510868
         val long=75.965646
+        val overlaySize=100f
 
         val homeLatLong=LatLng(lat,long)
         val zoomLevel=15f
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(homeLatLong,zoomLevel))
         map.addMarker(MarkerOptions().position(homeLatLong))
+
+        val overlay=GroundOverlayOptions().image(BitmapDescriptorFactory.fromResource(R.drawable.android))
+            .position(homeLatLong,overlaySize)
+
+        map.addGroundOverlay(overlay)
 
         // Add a marker in Sydney and move the camera
 //        val sydney = LatLng(-34.0, 151.0)
