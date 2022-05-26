@@ -11,10 +11,8 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.android.manasask.wander.databinding.ActivityMapsBinding
-import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.*
 import java.lang.Exception
 import java.util.*
 
@@ -74,14 +72,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             )
             map.addMarker(MarkerOptions().position(latLng)
                 .title(getString(R.string.dropped_pin))
-                .snippet(snippet))
+                .snippet(snippet)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)))
         }
     }
 
     private fun setPOIOnClick(map:GoogleMap){
         map.setOnPoiClickListener{ poi ->
             val poiMarker=map.addMarker(MarkerOptions().position(poi.latLng)
-                .title(poi.name))
+                .title(poi.name)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
             poiMarker?.showInfoWindow()
         }
     }
