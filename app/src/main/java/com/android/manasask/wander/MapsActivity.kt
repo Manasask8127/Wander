@@ -73,9 +73,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun setPOIOnClick(map:GoogleMap){
-        map.setOnPoiClickListener{poi ->
-            map.addMarker(MarkerOptions().position(poi.latLng)
+        map.setOnPoiClickListener{ poi ->
+            val poiMarker=map.addMarker(MarkerOptions().position(poi.latLng)
                 .title(poi.name))
+            poiMarker?.showInfoWindow()
         }
     }
 
